@@ -1,0 +1,29 @@
+from pylab import plot,show
+from math import sqrt
+
+# Calculate madelung constant
+def madelung(L):
+    Vtot = 0
+    for i in range(-L,L+1):
+        for j in range(-L,L+1):
+            for k in range(-L,L+1):
+                if (i+j+k)%2 == 0:
+                    sgn = 1.0
+                else:
+                    sgn = -1.0
+                if ((i == 0) and (j == 0) and (k == 0)):
+                    continue
+                Vtot += sgn/sqrt(i*i + j*j + k*k)
+    return Vtot
+
+# Plotting Madelung constant for dimensions L from  L = 1 to L = 30:
+L = list(range(1,31))
+Madelung = []
+for i in L:
+    Madelung.append(madelung(i))
+
+# Plot the function
+plot(L,Madelung)
+xlabel('L')
+ylabel('Madelung Constant')
+show()
